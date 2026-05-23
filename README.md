@@ -119,7 +119,7 @@ These are local harness results, not official SWE-bench `FAIL_TO_PASS` leaderboa
 
 ```bibtex
 @misc{zhang2026contextsphere,
-  title        = {Context Sphere: Topology-Aware Context Orchestration for Cost-Efficient LLM Repository Repair},
+  title        = {Context Sphere: Topology-Aware Context Orchestration for Autonomous Software Engineering},
   author       = {Zhang, Yuwen},
   year         = {2026},
   eprint       = {TBD},

@@ -17,7 +17,7 @@ The Context Sphere also routes the resulting context volume through an adversari
 
 We evaluate the current implementation with a 100-case retrieval ablation over pure-Python instances sampled from SWE-bench Verified. Context Sphere achieved 41 successful local repair passes under our \texttt{PASS\_TO\_PASS} smoke/regression harness, compared with 36 passes for a dense Vector baseline and 39 passes for a naive Hybrid retriever. The result shows a 13.8\% relative improvement over dense retrieval at an estimated inference cost of roughly \$0.08 per issue.
 
-Although the empirical stress test in this paper is repository-level bug repair, the architecture is not restricted to repair as an end task. We use repair because it provides an execution-checkable benchmark with concrete pass/fail signals; the same topology-aware retrieval and persona-conditioned orchestration pattern can be applied to broader autonomous software-engineering workflows such as refactoring, dependency analysis, code review, and implementation planning.
+Although the empirical stress test in this paper is repository-level bug repair, the architecture is not restricted to repair as an end task. We use repair because it provides an execution-checkable benchmark with concrete pass/fail signals; the same topology-aware retrieval and persona-conditioned orchestration pattern may be applicable to broader autonomous software-engineering workflows such as refactoring, dependency analysis, code review, and implementation planning.
 
 This paper makes the following contributions:
 \begin{itemize}

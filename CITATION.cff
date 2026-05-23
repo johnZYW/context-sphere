@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this artifact, please cite the Context Sphere preprint."
-title: "Context Sphere: Topology-Aware Context Orchestration for Cost-Efficient LLM Repository Repair"
+title: "Context Sphere: Topology-Aware Context Orchestration for Autonomous Software Engineering"
 authors:
   - family-names: Zhang
     given-names: Yuwen
