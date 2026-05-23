@@ -28,6 +28,17 @@ models/                   Released Context Projection v3 checkpoint and tokenize
 paper/                    arXiv LaTeX source and bibliography.
 ```
 
+## Model Weights
+
+The trained model artifacts are also released on Hugging Face:
+
+- Context Locator: <https://huggingface.co/Zywdd/context-sphere-locator>
+- Context Projection Model: <https://huggingface.co/Zywdd/context-sphere-projector>
+
+The Locator repository contains the custom PyTorch Context Sphere checkpoint
+and training report. The Projector repository contains the Hugging Face-style
+`model.safetensors`, tokenizer files, and projection training reports.
+
 ## Setup
 
 ```bash
