@@ -13,6 +13,12 @@ The pipeline starts from raw, unstructured issue text. The issue description is 
 
 The selector computes an alignment score representing whether a block or file is likely to contain, constrain, or directly command the root cause of the regression. The top-\(K\) highest-scoring blocks and projected files establish the initial coordinates of the problem space, acting as the Context Sphere centroid \(C\). Current selector evidence is selector-only: it measures ranking against touched-file labels and does not by itself prove patch correctness.
 
+\subsection{Training the Context Locator}
+
+The Context Locator is trained as a neural file-relevance model: given a visible issue description and candidate repository file content, it predicts whether the file belongs in the initial centroid set. Training examples are derived from SWE-bench training instances using touched-file supervision, with validation grouped by \textit{case\_slug} so that files from the same issue instance do not appear in both train and validation splits.
+
+The Locator uses a MiniLM-family cross-encoder backbone and is optimized with binary cross-entropy over issue--file pairs. Gold-patch contents are not exposed as model input: patch-derived information is used only to construct touched-file labels, while the visible training features consist of issue text, file paths, and repository source content available before solving the task. This leakage boundary is important because the Locator should learn structural relevance, not memorize solution diffs. The trained Locator produces the relevance scores consumed by the Assembler, making it the learned entry point for Context Sphere construction.
+
 \subsection{The Assembler: AST Neighborhood Expansion}
 
 Once the centroid coordinates are fixed, the Assembler performs a deterministic local Abstract Syntax Tree (AST) crawl to reconstruct nearby program dependencies. This prevents the information amputation that often occurs when vector retrieval returns an isolated snippet without its imported helpers or adjacent contracts.
