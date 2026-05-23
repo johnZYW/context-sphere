@@ -1826,7 +1826,7 @@ def main() -> int:
         help="Context assembly mode. projection filters the master sphere through context_projector_v3.",
     )
     parser.add_argument("--projection-model-dir", default="models/context_projector_v3")
-    parser.add_argument("--projection-thresholds", default="outputs/models/context_projector_v3_persona_thresholds.json")
+    parser.add_argument("--projection-thresholds", default="artifacts/model_reports/context_projector_v3_persona_thresholds.json")
     parser.add_argument("--projection-device", default="auto")
     parser.add_argument("--projection-batch-size", type=int, default=32)
     parser.add_argument("--projection-min-k", type=int, default=2)

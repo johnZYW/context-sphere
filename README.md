@@ -39,6 +39,47 @@ The Locator repository contains the custom PyTorch Context Sphere checkpoint
 and training report. The Projector repository contains the Hugging Face-style
 `model.safetensors`, tokenizer files, and projection training reports.
 
+Download the released weights into the paths expected by the scripts:
+
+```bash
+python - <<'PY'
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="Zywdd/context-sphere-locator",
+    repo_type="model",
+    local_dir="models",
+    allow_patterns=[
+        "context_sphere_v3_best.pt",
+        "context_sphere_v3_cloud_training_report.json",
+    ],
+)
+
+snapshot_download(
+    repo_id="Zywdd/context-sphere-projector",
+    repo_type="model",
+    local_dir="models/context_projector_v3",
+    allow_patterns=[
+        "model.safetensors",
+        "config.json",
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "special_tokens_map.json",
+        "vocab.txt",
+        "best_worker_margin.json",
+        "context_projector_v3_training_report.json",
+        "context_projector_v3_persona_thresholds.json",
+    ],
+)
+PY
+```
+
+After this step, `scripts/inference.py` will use
+`models/context_sphere_v3_best.pt` as the default Locator checkpoint, and
+projection mode will use `models/context_projector_v3` together with the
+released thresholds in
+`artifacts/model_reports/context_projector_v3_persona_thresholds.json`.
+
 ## Setup
 
 ```bash
@@ -114,6 +155,21 @@ python scripts/run_benchmarks.py \
 ```
 
 The paper comparison artifacts are under `artifacts/projection/`.
+
+For a direct Locator smoke test after downloading the Hugging Face weights:
+
+```bash
+find /path/to/target/repo -name "*.py" > /tmp/context_sphere_candidate_files.txt
+
+python scripts/inference.py \
+  --checkpoint models/context_sphere_v3_best.pt \
+  --problem-statement "Django crashes when resolving a model field during migration rendering" \
+  --candidate-files /tmp/context_sphere_candidate_files.txt \
+  --out outputs/locator_smoke.json
+```
+
+Replace `/path/to/target/repo` with the target checkout whose files should be
+ranked.
 
 ## Paper Results
 

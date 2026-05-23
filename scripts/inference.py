@@ -37,7 +37,7 @@ def issue_shorthand_to_url(value: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkpoint", default="outputs/runpod_downloads/models/context_sphere_v3_best.pt")
+    parser.add_argument("--checkpoint", default="models/context_sphere_v3_best.pt")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--issue", help="GitHub issue shorthand, e.g. psf/requests#7188")
     source.add_argument("--issue-url", help="GitHub issue URL, e.g. https://github.com/owner/repo/issues/123")
