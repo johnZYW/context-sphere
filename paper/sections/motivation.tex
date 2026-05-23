@@ -13,7 +13,7 @@
 ]
     \node (init) [state] {\textbf{State\_INIT}\\\scriptsize Repo Target Checkout};
     \node (pm) [lens, right=of init] {\textbf{PM Lens}\\\scriptsize $\mathcal{M}_{\text{PM}}$};
-    \node (worker) [lens, right=of pm] {\textbf{Worker Lens}\\\scriptsize $\mathcal{M}_{\text{W}}$};
+    \node (worker) [lens, right=of pm, xshift=0.65cm] {\textbf{Worker Lens}\\\scriptsize $\mathcal{M}_{\text{W}}$};
     \node (verify) [state, below=of pm, yshift=-0.1cm] {\textbf{State\_VERIFY}\\\scriptsize Execution Harness};
     \node (reviewer) [lens, right=of verify, xshift=1.0cm] {\textbf{Reviewer Lens}\\\scriptsize $\mathcal{M}_{\text{R}}$};
     \node (done) [state, left=of verify] {\textbf{State\_DONE}\\\scriptsize Unified Patch Commit};
