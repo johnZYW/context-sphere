@@ -3,9 +3,15 @@
 
 The 100-case ablation shows that retrieval policy, not only model capability, determines whether the orchestrator receives useful evidence. To optimize this bottleneck, we implemented a Context Projection Model trained as a persona-conditioned cross-encoder. The projector operates after Master Context Sphere assembly and before persona prompting, scoring candidate graph nodes separately for the Product Manager, Worker, and Reviewer.
 
+\subsection{Training Methodology}
+
+The projection model was trained on 7{,}299 training samples with an 888-row held-out validation split. Training used the \texttt{cross-encoder/ms-marco-MiniLM-L-6-v2} backbone on Apple Silicon MPS. To address the severe class imbalance in implementation-level routing, we applied persona-stratified oversampling, increasing Worker-positive training rows from 109 to 279 while preserving the grouped validation split. The model was optimized with asymmetric binary cross-entropy using persona-specific positive weights (Worker=18, Reviewer=10, PM=8) and a negative weight of 1.0.
+
+We selected the final checkpoint using a Worker Margin criterion, defined as the validation mean score for Worker-positive rows minus the validation mean score for Worker-negative rows. This early-stopping rule selected the Epoch 1 checkpoint, before later optimization could overfit easier PM/Reviewer structural labels and degrade the fragile Worker routing signal. The released artifact repository includes the training scripts, saved report, thresholds, validation scores, and model checkpoint metadata.
+
 \subsection{Asymmetric Cognitive Routing}
 
-The projection task is asymmetric across personas. Product Manager and Reviewer prompts benefit from high-precision structural skeletons: paths, interfaces, tests, imports, and risk-bearing adjacency. Worker prompts require higher-recall code access because implementation often depends on local function bodies and nearby edit anchors. Initial training exposed gradient starvation for implementation-level routing, where Worker-positive evidence was underrepresented relative to easier structural negatives. We mitigated this through persona-stratified oversampling and asymmetric loss weighting.
+The projection task is asymmetric across personas. Product Manager and Reviewer prompts benefit from high-precision structural skeletons: paths, interfaces, tests, imports, and risk-bearing adjacency. Worker prompts require higher-recall code access because implementation often depends on local function bodies and nearby edit anchors. Initial training exposed gradient starvation for implementation-level routing, where Worker-positive evidence was underrepresented relative to easier structural negatives.
 
 \subsection{Safety Floors Against Context Starvation}
 

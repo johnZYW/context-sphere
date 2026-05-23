@@ -59,9 +59,28 @@ Hybrid & 39 / 100 & 39.0\% & +8.3\% \\
 
 Within this benchmark slice, Context Sphere produced the highest local pass count among the three retrieval architectures. The result is consistent with the central hypothesis that deterministic structural dependency mapping supplies repair-relevant context that dense lexical or semantic retrieval can miss.
 
+Table~\ref{tab:efficiency-profile} reports the corresponding local efficiency profile reconstructed from the per-case ledgers. Context Sphere spends slightly more per issue than the dense Vector baseline because it adds structural neighborhood evidence, but it yields the lowest estimated cost per successful local pass among the three retrieval configurations in this run.
+
+\begin{table}[t]
+\centering
+\caption{Local efficiency profile reconstructed from per-case token and cost ledgers. Costs are estimates under the configured DeepSeek/MiniMax routing profile, not official benchmark fees.}
+\label{tab:efficiency-profile}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Retrieval Configuration} & \textbf{Local Passes} & \textbf{LLM Calls} & \textbf{Total Cost} & \textbf{Cost / Pass} \\
+\midrule
+Dense Vector baseline & 36 & 491 & \$7.3113 & \$0.2031 \\
+Context Sphere & \textbf{41} & 484 & \$8.2022 & \textbf{\$0.2001} \\
+Hybrid & 39 & 457 & \$8.2289 & \$0.2110 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
 \subsection{Cost and Failure Profile}
 
-The Context Sphere run recorded an estimated aggregate inference spend of \(\$8.202211\) across the 100-case campaign. In this local configuration, the framework operated at approximately \$0.08 per issue, suggesting that topology-aware context selection may be useful for cost-sensitive repository-repair pipelines.
+The Context Sphere run recorded an estimated aggregate inference spend of \(\$8.202211\) across the 100-case campaign. In this local configuration, the framework operated at approximately \$0.08 per issue, suggesting that topology-aware context selection may be useful for cost-sensitive repository-repair pipelines. We do not treat this table as a direct comparison against commercial frontier-agent products, since those systems often combine different model backends, tool policies, and hidden context-management strategies.
 
 The dominant shared bottleneck across all three retrieval methods was not model invocation volume but patch materialization. Patch-application failures accounted for 31 Vector failures, 27 Context Sphere failures, and 24 Hybrid failures. This indicates that future gains require improving both retrieval routing and the patch application layer: better context alone cannot recover patches that cannot be applied to the target checkout.
 

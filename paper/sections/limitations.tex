@@ -9,6 +9,8 @@ Our study is subject to several limitations that we aim to address in future ite
 
 \textbf{Projection scope.} The Context Projection Model results are derived from a preliminary 10-case smoke test selected from known Context Sphere successes. These results demonstrate routing efficiency and context-starvation mitigation, but they are not a comprehensive projection benchmark.
 
+\textbf{Projection training leakage protection.} The projection dataset is constructed from retrieved node features and persona labels derived from training-split instances. Gold-patch solution code is excluded from the projection feature set, and the projection model is trained to route candidate context nodes rather than to predict patch text. Nevertheless, because the broader benchmark uses public repositories and public issue metadata, future work should repeat the training protocol on time-split or private repositories.
+
 \textbf{Architectural scope.} The current implementation focuses on pure-Python repositories to enable reliable AST-based dependency resolution. The current Assembler resolves one-hop Python imports; this boundary keeps the context window compact, but it can miss deep inheritance chains, plugin registries, dynamic imports, and polyglot repository flows. Extending Context Sphere to TypeScript, Go, Java, C++, and mixed enterprise systems will require broader parser and import-resolution layers.
 
 \textbf{Patch materialization.} Patch application remained the dominant shared failure mode across retrieval configurations. Future work must pair retrieval improvements with checkout-aware edit materialization, stronger patch parsers, and stricter execution feedback.

@@ -2,9 +2,9 @@
 
 Artifact repository for the paper:
 
-**Context Sphere: Topology-Aware Context Orchestration for Cost-Efficient LLM Repository Repair**
+**Context Sphere: Topology-Aware Context Orchestration for Autonomous Software Engineering**
 
-Context Sphere is a repository-repair research artifact that combines:
+Context Sphere is an autonomous software-engineering research artifact evaluated on repository-level repair tasks. It combines:
 
 - neural centroid selection over issue text and repository files;
 - deterministic Python AST neighborhood expansion;
@@ -24,7 +24,7 @@ artifacts/cases/          Exact case lists used in the ablation and projection s
 artifacts/results/        100-case comparative report.
 artifacts/projection/     Projection smoke-test comparison artifacts.
 artifacts/model_reports/  Projection model training reports and threshold calibration.
-models/                   Lightweight projection model metadata; large weights are not included.
+models/                   Released Context Projection v3 checkpoint and tokenizer files.
 paper/                    arXiv LaTeX source and bibliography.
 ```
 
