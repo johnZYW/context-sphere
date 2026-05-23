@@ -1,275 +1,129 @@
-%%% -*-BibTeX-*-
-%%% Do NOT edit. File created by BibTeX with style
-%%% ACM-Reference-Format-Journals [18-Jan-2012].
-
 \begin{thebibliography}{13}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-%%% ====================================================================
-%%% NOTE TO THE USER: you can override these defaults by providing
-%%% customized versions of any of these macros before the \bibliography
-%%% command.  Each of them MUST provide its own final punctuation,
-%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
-%%% do not use final punctuation, in order to avoid confusing it with
-%%% the Web address.
-%%%
-%%% To suppress output of a particular field, define its macro to expand
-%%% to an empty string, or better, \unskip, like this:
-%%%
-%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
-%%%
-%%% \def \showDOI #1{\unskip}           % plain TeX syntax
-%%%
-%%% ====================================================================
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+  Narasimhan]{jimenez2024swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
+  Press, and Karthik~R. Narasimhan.
+\newblock {SWE}-bench: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations}, 2024.
+\newblock URL \url{https://openreview.net/forum?id=VTF8yNQM66}.
 
-\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
-\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
-\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
-\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
-\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
-\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
-\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
-\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
-\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
-% The following commands are used for tagged output and should be
-% invisible to TeX
-\providecommand\bibfield[2]{#2}
-\providecommand\bibinfo[2]{#2}
-\providecommand\natexlab[1]{#1}
-\providecommand\showeprint[2][]{arXiv:#2}
+\bibitem[Fan et~al.(2025)Fan, Vasilevski, Lin, Chen, Chen, Zhong, Zhang, He,
+  and Hassan]{fan2025sweeffi}
+Zhiyu Fan, Kirill Vasilevski, Dayi Lin, Boyuan Chen, Yihao Chen, Zhiqing Zhong,
+  Jie~M. Zhang, Pinjia He, and Ahmed~E. Hassan.
+\newblock {SWE-Effi}: Re-evaluating software ai agent system effectiveness
+  under resource constraints, 2025.
+\newblock URL \url{https://arxiv.org/abs/2509.09853}.
 
-\bibitem[Fan et~al\mbox{.}(2025)]%
-        {fan2025sweeffi}
-\bibfield{author}{\bibinfo{person}{Zhiyu Fan}, \bibinfo{person}{Kirill
-  Vasilevski}, \bibinfo{person}{Dayi Lin}, \bibinfo{person}{Boyuan Chen},
-  \bibinfo{person}{Yihao Chen}, \bibinfo{person}{Zhiqing Zhong},
-  \bibinfo{person}{Jie~M. Zhang}, \bibinfo{person}{Pinjia He}, {and}
-  \bibinfo{person}{Ahmed~E. Hassan}.} \bibinfo{year}{2025}\natexlab{}.
-\newblock \bibinfo{title}{{SWE-Effi}: Re-Evaluating Software AI Agent System
-  Effectiveness Under Resource Constraints}.
-\newblock
-\newblock
-\urldef\tempurl%
-\url{https://doi.org/10.48550/arXiv.2509.09853}
-\showDOI{\tempurl}
-\showeprint[arxiv]{2509.09853}
+\bibitem[Le~Goues et~al.(2019)Le~Goues, Pradel, and
+  Roychoudhury]{legoues2019apr}
+Claire Le~Goues, Michael Pradel, and Abhik Roychoudhury.
+\newblock Automated program repair.
+\newblock \emph{Communications of the ACM}, 62\penalty0 (12):\penalty0 56--65,
+  2019.
+\newblock \doi{10.1145/3318162}.
+\newblock URL
+  \url{https://cacm.acm.org/magazines/2019/12/241055-automated-program-repair/fulltext}.
 
+\bibitem[Zhang et~al.(2023)Zhang, Chen, Zhang, Keung, Liu, Zan, Mao, Lou, and
+  Chen]{zhang2023repocoder}
+Fengji Zhang, Bei Chen, Yue Zhang, Jacky Keung, Jin Liu, Daoguang Zan, Yi~Mao,
+  Jian-Guang Lou, and Weizhu Chen.
+\newblock {RepoCoder}: Repository-level code completion through iterative
+  retrieval and generation.
+\newblock In \emph{Proceedings of the 2023 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2471--2484, 2023.
+\newblock \doi{10.18653/v1/2023.emnlp-main.151}.
+\newblock URL \url{https://aclanthology.org/2023.emnlp-main.151/}.
 
-\bibitem[Guo et~al\mbox{.}(2021)]%
-        {guo2021graphcodebert}
-\bibfield{author}{\bibinfo{person}{Daya Guo}, \bibinfo{person}{Shuo Ren},
-  \bibinfo{person}{Shuai Lu}, \bibinfo{person}{Zhangyin Feng},
-  \bibinfo{person}{Duyu Tang}, \bibinfo{person}{Shujie Liu},
-  \bibinfo{person}{Long Zhou}, \bibinfo{person}{Nan Duan},
-  \bibinfo{person}{Alexey Svyatkovskiy}, \bibinfo{person}{Shengyu Fu},
-  \bibinfo{person}{Michele Tufano}, \bibinfo{person}{Shao~Kun Deng},
-  \bibinfo{person}{Colin~B. Clement}, \bibinfo{person}{Dawn Drain},
-  \bibinfo{person}{Neel Sundaresan}, \bibinfo{person}{Jian Yin},
-  \bibinfo{person}{Daxin Jiang}, {and} \bibinfo{person}{Ming Zhou}.}
-  \bibinfo{year}{2021}\natexlab{}.
-\newblock \showarticletitle{{GraphCodeBERT}: Pre-training Code Representations
-  with Data Flow}. In \bibinfo{booktitle}{\emph{International Conference on
-  Learning Representations}}.
-\newblock
-\urldef\tempurl%
-\url{https://arxiv.org/abs/2009.08366}
-\showURL{%
-\tempurl}
+\bibitem[Liu et~al.(2024{\natexlab{a}})Liu, Lin, Hewitt, Paranjape, Bevilacqua,
+  Petroni, and Liang]{liu2024lost}
+Nelson~F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua,
+  Fabio Petroni, and Percy Liang.
+\newblock Lost in the middle: How language models use long contexts.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  12:\penalty0 157--173, 2024{\natexlab{a}}.
+\newblock \doi{10.1162/tacl_a_00638}.
+\newblock URL \url{https://aclanthology.org/2024.tacl-1.9/}.
 
+\bibitem[Guo et~al.(2021)Guo, Ren, Lu, Feng, Tang, Liu, Zhou, Duan,
+  Svyatkovskiy, Fu, Tufano, Deng, Clement, Drain, Sundaresan, Yin, Jiang, and
+  Zhou]{guo2021graphcodebert}
+Daya Guo, Shuo Ren, Shuai Lu, Zhangyin Feng, Duyu Tang, Shujie Liu, Long Zhou,
+  Nan Duan, Alexey Svyatkovskiy, Shengyu Fu, Michele Tufano, Shao~Kun Deng,
+  Colin~B. Clement, Dawn Drain, Neel Sundaresan, Jian Yin, Daxin Jiang, and
+  Ming Zhou.
+\newblock {GraphCodeBERT}: Pre-training code representations with data flow.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+\newblock URL \url{https://arxiv.org/abs/2009.08366}.
 
-\bibitem[Hong et~al\mbox{.}(2024)]%
-        {hong2024metagpt}
-\bibfield{author}{\bibinfo{person}{Sirui Hong}, \bibinfo{person}{Mingchen
-  Zhuge}, \bibinfo{person}{Jiaqi Chen}, \bibinfo{person}{Xiawu Zheng},
-  \bibinfo{person}{Yuheng Cheng}, \bibinfo{person}{Ceyao Zhang},
-  \bibinfo{person}{Jinlin Wang}, \bibinfo{person}{Zili Wang},
-  \bibinfo{person}{Steven Ka~Shing Yau}, \bibinfo{person}{Zijuan Lin},
-  \bibinfo{person}{Liyang Zhou}, \bibinfo{person}{Chenyu Ran},
-  \bibinfo{person}{Lingfeng Xiao}, \bibinfo{person}{Chenglin Wu}, {and}
-  \bibinfo{person}{J{\"u}rgen Schmidhuber}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \bibinfo{title}{{MetaGPT}: Meta Programming for A Multi-Agent
-  Collaborative Framework}.
-\newblock
-\newblock
-\showeprint[arxiv]{2308.00352}
-\urldef\tempurl%
-\url{https://arxiv.org/abs/2308.00352}
-\showURL{%
-\tempurl}
+\bibitem[Liu et~al.(2024{\natexlab{b}})Liu, Yu, Zan, Shen, Zhang, Zhao, Jin,
+  and Wang]{liu2024graphcoder}
+Wei Liu, Ailun Yu, Daoguang Zan, Bo~Shen, Wei Zhang, Haiyan Zhao, Zhi Jin, and
+  Qianxiang Wang.
+\newblock {GraphCoder}: Enhancing repository-level code completion via code
+  context graph-based retrieval and language model, 2024{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2406.07003}.
 
+\bibitem[Qian et~al.(2024)Qian, Liu, Liu, Chen, Dang, Li, Yang, Chen, Su, Cong,
+  Xu, Li, Liu, and Sun]{qian2024chatdev}
+Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang,
+  Weize Chen, Yusheng Su, Xin Cong, Juyuan Xu, Dahai Li, Zhiyuan Liu, and
+  Maosong Sun.
+\newblock {ChatDev}: Communicative agents for software development.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics}, 2024.
+\newblock \doi{10.18653/v1/2024.acl-long.810}.
+\newblock URL \url{https://aclanthology.org/2024.acl-long.810/}.
 
-\bibitem[Jimenez et~al\mbox{.}(2024)]%
-        {jimenez2024swebench}
-\bibfield{author}{\bibinfo{person}{Carlos~E. Jimenez}, \bibinfo{person}{John
-  Yang}, \bibinfo{person}{Alexander Wettig}, \bibinfo{person}{Shunyu Yao},
-  \bibinfo{person}{Kexin Pei}, \bibinfo{person}{Ofir Press}, {and}
-  \bibinfo{person}{Karthik~R. Narasimhan}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{{SWE}-bench: Can Language Models Resolve Real-World
-  {GitHub} Issues?}. In \bibinfo{booktitle}{\emph{The Twelfth International
-  Conference on Learning Representations}}.
-\newblock
-\showeprint[arxiv]{2310.06770}
-\urldef\tempurl%
-\url{https://openreview.net/forum?id=VTF8yNQM66}
-\showURL{%
-\tempurl}
+\bibitem[Hong et~al.(2024)Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang,
+  Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber]{hong2024metagpt}
+Sirui Hong, Mingchen Zhuge, Jiaqi Chen, Xiawu Zheng, Yuheng Cheng, Ceyao Zhang,
+  Jinlin Wang, Zili Wang, Steven Ka~Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu
+  Ran, Lingfeng Xiao, Chenglin Wu, and J{\"u}rgen Schmidhuber.
+\newblock {MetaGPT}: Meta programming for a multi-agent collaborative
+  framework, 2024.
+\newblock URL \url{https://arxiv.org/abs/2308.00352}.
 
+\bibitem[Yang et~al.(2024)Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan, and
+  Press]{yang2024sweagent}
+John Yang, Carlos~E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao,
+  Karthik Narasimhan, and Ofir Press.
+\newblock {SWE}-agent: Agent-computer interfaces enable automated software
+  engineering, 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.15793}.
 
-\bibitem[Le~Goues et~al\mbox{.}(2019)]%
-        {legoues2019apr}
-\bibfield{author}{\bibinfo{person}{Claire Le~Goues}, \bibinfo{person}{Michael
-  Pradel}, {and} \bibinfo{person}{Abhik Roychoudhury}.}
-  \bibinfo{year}{2019}\natexlab{}.
-\newblock \showarticletitle{Automated Program Repair}.
-\newblock \bibinfo{journal}{\emph{Commun. ACM}} \bibinfo{volume}{62},
-  \bibinfo{number}{12} (\bibinfo{year}{2019}), \bibinfo{pages}{56--65}.
-\newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1145/3318162}
-\showDOI{\tempurl}
+\bibitem[Sharma et~al.(2023)Sharma, Tong, Korbak, Duvenaud, Askell, Bowman,
+  Cheng, Durmus, Hatfield-Dodds, Johnston, Kravec, Maxwell, McCandlish,
+  Ndousse, Rausch, Schiefer, Yan, Zhang, and Perez]{sharma2023sycophancy}
+Mrinank Sharma, Meg Tong, Tomasz Korbak, David Duvenaud, Amanda Askell,
+  Samuel~R. Bowman, Newton Cheng, Esin Durmus, Zac Hatfield-Dodds, Scott~R.
+  Johnston, Shauna Kravec, Timothy Maxwell, Sam McCandlish, Kamal Ndousse,
+  Oliver Rausch, Nicholas Schiefer, Da~Yan, Miranda Zhang, and Ethan Perez.
+\newblock Towards understanding sycophancy in language models, 2023.
+\newblock URL \url{https://arxiv.org/abs/2310.13548}.
 
+\bibitem[{Princeton Language and Intelligence}(2026)]{princetonhal2026}
+{Princeton Language and Intelligence}.
+\newblock {Holistic Agent Leaderboard}.
+\newblock Project website, 2026.
+\newblock URL \url{https://hal.cs.princeton.edu/about}.
+\newblock Accessed 2026-05-23.
 
-\bibitem[Liu et~al\mbox{.}(2024a)]%
-        {liu2024lost}
-\bibfield{author}{\bibinfo{person}{Nelson~F. Liu}, \bibinfo{person}{Kevin Lin},
-  \bibinfo{person}{John Hewitt}, \bibinfo{person}{Ashwin Paranjape},
-  \bibinfo{person}{Michele Bevilacqua}, \bibinfo{person}{Fabio Petroni}, {and}
-  \bibinfo{person}{Percy Liang}.} \bibinfo{year}{2024}\natexlab{a}.
-\newblock \showarticletitle{Lost in the Middle: How Language Models Use Long
-  Contexts}.
-\newblock \bibinfo{journal}{\emph{Transactions of the Association for
-  Computational Linguistics}}  \bibinfo{volume}{12} (\bibinfo{year}{2024}),
-  \bibinfo{pages}{157--173}.
-\newblock
-\urldef\tempurl%
-\url{https://doi.org/10.1162/tacl_a_00638}
-\showDOI{\tempurl}
-
-
-\bibitem[Liu et~al\mbox{.}(2024b)]%
-        {liu2024graphcoder}
-\bibfield{author}{\bibinfo{person}{Wei Liu}, \bibinfo{person}{Ailun Yu},
-  \bibinfo{person}{Daoguang Zan}, \bibinfo{person}{Bo Shen},
-  \bibinfo{person}{Wei Zhang}, \bibinfo{person}{Haiyan Zhao},
-  \bibinfo{person}{Zhi Jin}, {and} \bibinfo{person}{Qianxiang Wang}.}
-  \bibinfo{year}{2024}\natexlab{b}.
-\newblock \bibinfo{title}{{GraphCoder}: Enhancing Repository-Level Code
-  Completion via Code Context Graph-based Retrieval and Language Model}.
-\newblock
-\newblock
-\showeprint[arxiv]{2406.07003}
-\urldef\tempurl%
-\url{https://arxiv.org/abs/2406.07003}
-\showURL{%
-\tempurl}
-
-
-\bibitem[{Princeton Language and Intelligence}(2026)]%
-        {princetonhal2026}
-\bibfield{author}{\bibinfo{person}{{Princeton Language and Intelligence}}.}
-  \bibinfo{year}{2026}\natexlab{}.
-\newblock \bibinfo{title}{{Holistic Agent Leaderboard}}.
-\newblock \bibinfo{howpublished}{Project website}.
-\newblock
-\urldef\tempurl%
-\url{https://hal.cs.princeton.edu/about}
-\showURL{%
-\tempurl}
-\newblock
-\shownote{Accessed 2026-05-23}.
-
-
-\bibitem[Qian et~al\mbox{.}(2024)]%
-        {qian2024chatdev}
-\bibfield{author}{\bibinfo{person}{Chen Qian}, \bibinfo{person}{Wei Liu},
-  \bibinfo{person}{Hongzhang Liu}, \bibinfo{person}{Nuo Chen},
-  \bibinfo{person}{Yufan Dang}, \bibinfo{person}{Jiahao Li},
-  \bibinfo{person}{Cheng Yang}, \bibinfo{person}{Weize Chen},
-  \bibinfo{person}{Yusheng Su}, \bibinfo{person}{Xin Cong},
-  \bibinfo{person}{Juyuan Xu}, \bibinfo{person}{Dahai Li},
-  \bibinfo{person}{Zhiyuan Liu}, {and} \bibinfo{person}{Maosong Sun}.}
-  \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{{ChatDev}: Communicative Agents for Software
-  Development}. In \bibinfo{booktitle}{\emph{Proceedings of the 62nd Annual
-  Meeting of the Association for Computational Linguistics}}.
-\newblock
-\urldef\tempurl%
-\url{https://doi.org/10.18653/v1/2024.acl-long.810}
-\showDOI{\tempurl}
-
-
-\bibitem[Sharma et~al\mbox{.}(2023)]%
-        {sharma2023sycophancy}
-\bibfield{author}{\bibinfo{person}{Mrinank Sharma}, \bibinfo{person}{Meg Tong},
-  \bibinfo{person}{Tomasz Korbak}, \bibinfo{person}{David Duvenaud},
-  \bibinfo{person}{Amanda Askell}, \bibinfo{person}{Samuel~R. Bowman},
-  \bibinfo{person}{Newton Cheng}, \bibinfo{person}{Esin Durmus},
-  \bibinfo{person}{Zac Hatfield-Dodds}, \bibinfo{person}{Scott~R. Johnston},
-  \bibinfo{person}{Shauna Kravec}, \bibinfo{person}{Timothy Maxwell},
-  \bibinfo{person}{Sam McCandlish}, \bibinfo{person}{Kamal Ndousse},
-  \bibinfo{person}{Oliver Rausch}, \bibinfo{person}{Nicholas Schiefer},
-  \bibinfo{person}{Da Yan}, \bibinfo{person}{Miranda Zhang}, {and}
-  \bibinfo{person}{Ethan Perez}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \bibinfo{title}{Towards Understanding Sycophancy in Language Models}.
-\newblock
-\newblock
-\showeprint[arxiv]{2310.13548}
-\urldef\tempurl%
-\url{https://arxiv.org/abs/2310.13548}
-\showURL{%
-\tempurl}
-
-
-\bibitem[Yang et~al\mbox{.}(2024)]%
-        {yang2024sweagent}
-\bibfield{author}{\bibinfo{person}{John Yang}, \bibinfo{person}{Carlos~E.
-  Jimenez}, \bibinfo{person}{Alexander Wettig}, \bibinfo{person}{Kilian
-  Lieret}, \bibinfo{person}{Shunyu Yao}, \bibinfo{person}{Karthik Narasimhan},
-  {and} \bibinfo{person}{Ofir Press}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \bibinfo{title}{{SWE}-agent: Agent-Computer Interfaces Enable
-  Automated Software Engineering}.
-\newblock
-\newblock
-\showeprint[arxiv]{2405.15793}
-\urldef\tempurl%
-\url{https://arxiv.org/abs/2405.15793}
-\showURL{%
-\tempurl}
-
-
-\bibitem[Zhang et~al\mbox{.}(2023)]%
-        {zhang2023repocoder}
-\bibfield{author}{\bibinfo{person}{Fengji Zhang}, \bibinfo{person}{Bei Chen},
-  \bibinfo{person}{Yue Zhang}, \bibinfo{person}{Jacky Keung},
-  \bibinfo{person}{Jin Liu}, \bibinfo{person}{Daoguang Zan},
-  \bibinfo{person}{Yi Mao}, \bibinfo{person}{Jian-Guang Lou}, {and}
-  \bibinfo{person}{Weizhu Chen}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{{RepoCoder}: Repository-Level Code Completion
-  Through Iterative Retrieval and Generation}. In
-  \bibinfo{booktitle}{\emph{Proceedings of the 2023 Conference on Empirical
-  Methods in Natural Language Processing}}. \bibinfo{pages}{2471--2484}.
-\newblock
-\urldef\tempurl%
-\url{https://doi.org/10.18653/v1/2023.emnlp-main.151}
-\showDOI{\tempurl}
-
-
-\bibitem[Zheng et~al\mbox{.}(2023)]%
-        {zheng2023judging}
-\bibfield{author}{\bibinfo{person}{Lianmin Zheng}, \bibinfo{person}{Wei-Lin
-  Chiang}, \bibinfo{person}{Ying Sheng}, \bibinfo{person}{Siyuan Zhuang},
-  \bibinfo{person}{Zhanghao Wu}, \bibinfo{person}{Yonghao Zhuang},
-  \bibinfo{person}{Zi Lin}, \bibinfo{person}{Zhuohan Li},
-  \bibinfo{person}{Dacheng Li}, \bibinfo{person}{Eric~P. Xing},
-  \bibinfo{person}{Hao Zhang}, \bibinfo{person}{Joseph~E. Gonzalez}, {and}
-  \bibinfo{person}{Ion Stoica}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{Judging {LLM}-as-a-Judge with {MT}-Bench and
-  Chatbot Arena}. In \bibinfo{booktitle}{\emph{Advances in Neural Information
-  Processing Systems}}.
-\newblock
-\urldef\tempurl%
-\url{https://arxiv.org/abs/2306.05685}
-\showURL{%
-\tempurl}
-
+\bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li,
+  Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao
+  Zhuang, Zi~Lin, Zhuohan Li, Dacheng Li, Eric~P. Xing, Hao Zhang, Joseph~E.
+  Gonzalez, and Ion Stoica.
+\newblock Judging {LLM}-as-a-judge with {MT}-bench and chatbot arena.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2306.05685}.
 
 \end{thebibliography}

@@ -15,7 +15,7 @@
     \node (pm) [lens, right=of init] {\textbf{PM Lens}\\\scriptsize $\mathcal{M}_{\text{PM}}$};
     \node (worker) [lens, right=of pm] {\textbf{Worker Lens}\\\scriptsize $\mathcal{M}_{\text{W}}$};
     \node (reviewer) [lens, below=of worker, yshift=-0.5cm] {\textbf{Reviewer Lens}\\\scriptsize $\mathcal{M}_{\text{R}}$};
-    \node (verify) [state, left=of reviewer, xshift=-0.2cm] {\textbf{State\_VERIFY}\\\scriptsize Execution Harness};
+    \node (verify) [state, below=of pm, yshift=-0.5cm] {\textbf{State\_VERIFY}\\\scriptsize Execution Harness};
     \node (done) [state, left=of verify] {\textbf{State\_DONE}\\\scriptsize Unified Patch Commit};
 
     \draw [arrow] (init) -- node[above, font=\scriptsize] {\texttt{selector\_output}} (pm);
@@ -68,16 +68,21 @@ In the live \texttt{wagtail\_\_wagtail-1120} trace, the Worker required three at
     \foreach \p in {(-2.8,1.5), (-2.2,-2.2), (3.0,2.5), (0.8,-2.8), (-1.2,2.6)}
         \filldraw[color=gray!40] \p circle (2pt);
 
-    \filldraw[color=red] (2.4,-1.2) circle (3pt)
-        node[right, font=\scriptsize, color=red!90!black, xshift=0.05cm, align=left]
-        {\textbf{Sub-Centroid} ($C_{\text{sub}}$)\\\scriptsize Trace-isolated target};
+    \coordinate (subcentroid) at (2.4,-1.2);
+    \filldraw[color=red] (subcentroid) circle (3pt);
 
     \draw[red, dashed, thick, fill=red!4, fill opacity=0.3]
         plot[smooth cycle, tension=0.65]
         coordinates {(0,1.5) (1.2,1.0) (3.1,-1.2) (1.4,-2.0) (-1.2,-1.2) (-1.4,0.4)};
 
-    \node[color=red!80!black, font=\scriptsize, align=center] at (1.8,-2.4)
+    \node[color=red!80!black, font=\scriptsize, align=center] at (-1.65,-2.55)
         {\textbf{Asymmetric Sphere}\\\textbf{Expansion Volume}};
+
+    \node[draw=red!45, fill=white, rounded corners=1pt, inner sep=1.5pt,
+          text=red!90!black, font=\tiny, align=left, anchor=west]
+          (subLabel) at (0.2,-3.05)
+          {\textbf{Sub-Centroid} ($C_{\text{sub}}$)\\Trace-isolated target};
+    \draw[-{Stealth[scale=0.8]}, thin, color=red!80!black] (subLabel.north east) -- (subcentroid);
 
     \node[color=gray!60, font=\tiny] at (-2.4,-3.2) {Repository Space $G(V,E)$};
 \end{tikzpicture}%
