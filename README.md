@@ -2,7 +2,7 @@
 
 Artifact repository for the paper:
 
-**Context Sphere: Topology-Aware Context Orchestration for Autonomous Software Engineering**
+**Context Sphere: Topology-Aware Context Orchestration for Cost-Efficient LLM Repository Repair**
 
 Context Sphere is an autonomous software-engineering research artifact evaluated on repository-level repair tasks. It combines:
 
@@ -119,7 +119,7 @@ These are local harness results, not official SWE-bench `FAIL_TO_PASS` leaderboa
 
 ```bibtex
 @misc{zhang2026contextsphere,
-  title        = {Context Sphere: Topology-Aware Context Orchestration for Autonomous Software Engineering},
+  title        = {Context Sphere: Topology-Aware Context Orchestration for Cost-Efficient LLM Repository Repair},
   author       = {Zhang, Yuwen},
   year         = {2026},
   eprint       = {TBD},
