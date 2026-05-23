@@ -1,0 +1,43 @@
+\section{Methodology}
+
+\subsection{Task Selection}
+
+The primary evaluation uses 100 pure-Python instances sampled from SWE-bench Verified. The sample emphasizes repositories whose dependency structure can be handled by the current Python AST Assembler: \texttt{django/django}, \texttt{sphinx-doc/sphinx}, \texttt{psf/requests}, \texttt{pytest-dev/pytest}, and \texttt{pallets/flask}. Each instance is initialized at the benchmark base commit and paired with the issue text used to construct the retrieval query.
+
+The Locator selector was trained with patch-level supervision from a separate training subset. During evaluation, retrieval uses only the issue text and repository snapshot available at the base commit; gold-patch content is strictly excluded from inference-time retrieval to maintain an adversarial setting.
+
+\subsection{Retrieval Configurations}
+
+We compare three retrieval configurations under the same downstream PM--Worker--Reviewer orchestration protocol:
+\begin{itemize}
+    \item \textbf{Dense Vector baseline:} ranks repository files using dense semantic similarity between the issue text and file contents.
+    \item \textbf{Context Sphere:} identifies a centroid using the Locator and then expands the context through one-hop AST-derived local dependencies.
+    \item \textbf{Hybrid:} merges dense Vector and Context Sphere candidates using a dense-first ordering policy.
+\end{itemize}
+Holding the generator, reviewer, verification harness, and attempt budget fixed isolates the retrieval policy as the controlled variable.
+
+All three retrieval configurations used the same retrieval and repair budget: top-\(K=5\) core files, a maximum of 24 one-hop neighborhood files, a maximum file-character clamp of 60{,}000 characters, and at most three Worker--Reviewer repair attempts per issue.
+
+\subsection{Model and Provider Configuration}
+
+Unless otherwise stated, PM, Worker, and Reviewer calls in the 100-case ablation used the fallback routing profile with DeepSeek \texttt{deepseek-chat} as the primary OpenAI-compatible backend and MiniMax \texttt{MiniMax-M2.7} as the secondary backend. Locator and Assembler stages were local scripts and did not invoke completion models. Provider fallback was enabled only when primary calls failed due to rate limits, quota or payment errors, timeouts, or server-side errors. Token and cost accounting were attributed to the backend that produced each response.
+
+\subsection{Verification Signal}
+
+For each run, the orchestrator emits a candidate patch, applies it to the checked-out repository, and executes the configured local regression command. We count a local pass only when the patch applies cleanly and the command exits successfully. This is a local \texttt{PASS\_TO\_PASS} smoke/regression signal. It is stricter than internal reviewer approval, but it is not equivalent to official SWE-bench \texttt{FAIL\_TO\_PASS} scoring because the hidden benchmark test patch is not applied.
+
+\subsection{Metrics}
+
+The primary metric is local \texttt{PASS\_TO\_PASS} pass count across the 100 intended cases. Secondary metrics include pass overlap across retrieval methods, patch-application failure buckets, total model invocations, and estimated inference cost. Cost is computed from provider-specific token coefficients and emitted per case in the metrics ledger. We report relative improvement over the dense Vector baseline as:
+\[
+    \frac{\text{Passes}_{\text{Context Sphere}} - \text{Passes}_{\text{Vector}}}
+    {\text{Passes}_{\text{Vector}}}.
+\]
+
+\subsection{Reproducibility Artifacts}
+
+The paper results are grounded in the local comparative report generated from \path{outputs/ablation_100_vector}, \path{outputs/ablation_100_context}, and \path{outputs/ablation_100_hybrid}. The report reconstructs aggregate statistics from per-case metrics because one case terminated before aggregate summary writing. We therefore treat the crashed case as a non-pass for all methods.
+
+\subsection{Projection Smoke Cohort}
+
+The Context Projection Model is evaluated as a follow-on smoke test over the first 10 cases that passed under the 100-case Context Sphere run. This design intentionally measures whether persona-conditioned projection can preserve known successes while reducing context load. It should not be interpreted as an unbiased repair benchmark. The projection comparison is generated from \path{outputs/projection_smoke_10_fallback} and \path{outputs/projection_smoke_10_floor}.

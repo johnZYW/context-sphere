@@ -1,0 +1,37 @@
+\section{Preliminary Investigation: Token-Efficient Projection Routing}
+\label{sec:projection}
+
+The 100-case ablation shows that retrieval policy, not only model capability, determines whether the orchestrator receives useful evidence. To optimize this bottleneck, we implemented a Context Projection Model trained as a persona-conditioned cross-encoder. The projector operates after Master Context Sphere assembly and before persona prompting, scoring candidate graph nodes separately for the Product Manager, Worker, and Reviewer.
+
+\subsection{Asymmetric Cognitive Routing}
+
+The projection task is asymmetric across personas. Product Manager and Reviewer prompts benefit from high-precision structural skeletons: paths, interfaces, tests, imports, and risk-bearing adjacency. Worker prompts require higher-recall code access because implementation often depends on local function bodies and nearby edit anchors. Initial training exposed gradient starvation for implementation-level routing, where Worker-positive evidence was underrepresented relative to easier structural negatives. We mitigated this through persona-stratified oversampling and asymmetric loss weighting.
+
+\subsection{Safety Floors Against Context Starvation}
+
+Aggressive thresholding reduced token load but created a failure mode we call \textit{context starvation}: a persona could receive too few nodes to maintain a coherent local view. In the no-floor projection smoke test, the Reviewer often received zero selected nodes, and the pass rate dropped to 6/10 on a cohort that full Context Sphere solved completely. We therefore added a deterministic Top-\(K\) safety floor with \(min\_k=2\), ensuring that every persona receives at least two context anchors even when calibrated model confidence is low.
+
+\subsection{Projection Smoke Results}
+
+Table~\ref{tab:projection_results} summarizes the projection smoke test. The cohort consists of 10 cases selected from Context Sphere successes in the 100-case ablation, so the baseline pass rate is intentionally 10/10. With the Top-\(K\) safety floor, projection preserved 9/10 passes while reducing input tokens by 71.5\% and estimated inference cost by 58.4\%.
+
+\begin{table}[t]
+\centering
+\caption{Projection-mode routing on a 10-case Context Sphere success cohort.}
+\label{tab:projection_results}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Full Context Sphere} & \textbf{Projection (\(min\_k=2\))} & \textbf{Change} \\
+\midrule
+Local pass rate & 10 / 10 & 9 / 10 & -10.0\% \\
+Total tokens & 2{,}090{,}215 & 643{,}512 & \textbf{-69.2\%} \\
+Input tokens & 2{,}078{,}983 & 592{,}935 & \textbf{-71.5\%} \\
+Context characters & 8{,}483{,}908 & 1{,}979{,}745 & \textbf{-76.7\%} \\
+Inference cost & \$0.5737 & \$0.2386 & \textbf{-58.4\%} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+This result reframes projection as a resource-control layer rather than a replacement for the Context Sphere. The Master Sphere remains responsible for broad structural recall; projection converts that master topology into persona-specific Spheres of Influence that constrain token load while preserving enough evidence for downstream repair.

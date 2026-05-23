@@ -1,0 +1,47 @@
+\section{The Context Sphere Architecture}
+\label{sec:approach}
+
+The conceptual foundation of the framework is a spatial representation of software repositories. We model a repository as a directed dependency graph \(G=(V,E)\), where \(V=\{f_1,f_2,\dots,f_n\}\) represents source files or partitioned code chunks, and \(E=\{(f_i,f_j)\}\) represents explicit program dependencies such as module imports, local definitions, or configuration requirements.
+
+\subsection{Formalizing the Spatial Volume}
+
+The construction of an issue-specific Context Sphere proceeds through a dual-layer neural and deterministic pipeline:
+
+\begin{enumerate}
+    \item \textbf{Centroid isolation (\(C\)):} Given an unstructured issue specification \(I\), the Locator scores repository blocks and extracts the top-ranked modules or chunks to instantiate the problem's core centroid set:
+    \begin{equation}
+        C = \{v \in V \mid \text{Score}(v, I) > \tau\},
+    \end{equation}
+    where \(\tau\) represents a configured retrieval activation threshold.
+
+    \item \textbf{Neighborhood expansion (\(N\)):} To prevent structural data loss caused by static chunk boundaries, the Assembler executes a local one-hop dependency sweep from the centroid coordinates. An AST crawler parses files within \(C\), extracts internal import paths, and builds the neighborhood set:
+    \begin{equation}
+        N(C) = \{u \in V \mid \exists v \in C \text{ s.t. } (v,u) \in E\}.
+    \end{equation}
+
+    \item \textbf{Unified sphere aggregation (\(S\)):} The bounded context space passed to the orchestration pipeline is the union of the centroid and its local neighborhood:
+    \begin{equation}
+        S = C \cup N(C).
+    \end{equation}
+\end{enumerate}
+
+\subsection{Persona Projection and Context Lenses}
+
+Rather than processing \(S\) through a single monolithic prompt, the framework projects the same bounded volume into three decoupled persona lenses:
+
+\begin{itemize}
+    \item \textbf{Product Manager lens (\(\mathcal{M}_{\text{PM}}\)):} Projects the issue and spatial volume \(S\) into explicit acceptance criteria and risk constraints, producing a persistent validation contract \(\mathcal{K}_{\text{shared}}\) stored as \texttt{constraints.json}.
+    \item \textbf{Worker lens (\(\mathcal{M}_{\text{W}}\)):} Consumes \(S \cup \mathcal{K}_{\text{shared}}\) and operates on implementation mechanics, control flow, imports, and local test expectations, outputting a candidate patch delta \(\Delta\).
+    \item \textbf{Reviewer lens (\(\mathcal{M}_{\text{R}}\)):} Evaluates \(\Delta\) against the bounded neighborhood \(S\), blocking structural regressions and returning a verification state \(\mathcal{V} \in \{\texttt{APPROVED}, \texttt{REJECTED}\}\).
+\end{itemize}
+
+\subsection{Stateful Adversarial Feedback Loop}
+
+The orchestrator manages a correction task as a deterministic state machine:
+\[
+\texttt{INIT} \rightarrow \texttt{PM} \rightarrow \texttt{WORKER}
+\rightarrow \texttt{REVIEWER}.
+\]
+If the Reviewer returns \(\mathcal{V}=\texttt{REJECTED}\), the orchestrator serializes the reviewer's diagnostics into \(\mathcal{K}_{\text{shared}}\) and routes execution back to the Worker. The loop continues until either the Reviewer returns \(\mathcal{V}=\texttt{APPROVED}\) or a fixed attempt budget is exhausted, at which point the run terminates with manual intervention.
+
+This design turns review into a state transition rather than a conversational suggestion. The Worker cannot simply ignore a prior critique, because the critique becomes part of the shared constraint ledger consumed on the next turn. The Reviewer, similarly, must choose between explicit approval and explicit rejection, giving the evaluation trace a measurable convergence structure.

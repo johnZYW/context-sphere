@@ -1,0 +1,11 @@
+{
+  "epoch": 1,
+  "global_step": 467,
+  "train_loss": 1.7938466038419296,
+  "validation_loss": 1.3247293804639153,
+  "worker_f1_at_0_5": 0.1694915254237288,
+  "worker_margin": 0.18419288120725416,
+  "worker_negative_mean": 0.18152672360015024,
+  "worker_positive_mean": 0.3657196048074044,
+  "worker_recall_at_0_5": 0.38461538461538464
+}

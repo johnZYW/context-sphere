@@ -1,0 +1,14 @@
+\section{Limitations}
+\label{sec:limitations}
+
+Our study is subject to several limitations that we aim to address in future iterations.
+
+\textbf{Evaluation protocol.} Metrics are derived from a local \texttt{PASS\_TO\_PASS} regression harness rather than the official SWE-bench Verified evaluation protocol. The results therefore characterize retrieval behavior under our local verifier and should not be interpreted as official leaderboard scores.
+
+\textbf{Selector supervision and leakage risk.} The Locator selector was trained using patch-label supervision. Although evaluation excludes gold-patch content during retrieval, issue metadata can still leak correlations from historical tasks. A stronger protocol should include time-split tasks, less-public repositories, and explicit model-version provenance.
+
+\textbf{Projection scope.} The Context Projection Model results are derived from a preliminary 10-case smoke test selected from known Context Sphere successes. These results demonstrate routing efficiency and context-starvation mitigation, but they are not a comprehensive projection benchmark.
+
+\textbf{Architectural scope.} The current implementation focuses on pure-Python repositories to enable reliable AST-based dependency resolution. The current Assembler resolves one-hop Python imports; this boundary keeps the context window compact, but it can miss deep inheritance chains, plugin registries, dynamic imports, and polyglot repository flows. Extending Context Sphere to TypeScript, Go, Java, C++, and mixed enterprise systems will require broader parser and import-resolution layers.
+
+\textbf{Patch materialization.} Patch application remained the dominant shared failure mode across retrieval configurations. Future work must pair retrieval improvements with checkout-aware edit materialization, stronger patch parsers, and stricter execution feedback.

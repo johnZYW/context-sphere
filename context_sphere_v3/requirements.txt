@@ -1,0 +1,6 @@
+# Local interface tests do not require torch.
+# Slice 2 and later require PyTorch 2.x for tensor math.
+torch>=2.0
+pytest>=8
+wandb>=0.17
+pyarrow>=15

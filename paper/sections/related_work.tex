@@ -1,0 +1,24 @@
+\section{Related Work}
+\label{sec:related_work}
+
+Our framework interfaces with three paradigms in software automation: automated program repair, code-centric retrieval, and collaborative multi-agent system design.
+
+\subsection{Automated Program Repair}
+
+Traditional automated program repair (APR) systems rely on search-based heuristics, genetic programming, templates, or semantic constraints to manipulate programs under a test or specification signal. These methods can provide strong precision within localized settings, but often depend on concrete test suites or other executable specifications~\cite{legoues2019apr}. SWE-bench reframed this challenge for language-model agents by evaluating whether a model can edit real repositories in response to natural-language issues~\cite{jimenez2024swebench}. The Context Sphere builds on this problem setting, but focuses on the context-orchestration layer: how an agent should select, expand, and reuse repository evidence before and during patch generation.
+
+\subsection{Repository Retrieval Pipelines}
+
+Codebase retrieval systems commonly map natural-language issues to files, functions, or chunks using lexical retrieval, embeddings, reranking, or learned selectors. This makes large repositories tractable, but standard retrieval can ignore the dependency topology that makes a code edit valid. RepoCoder demonstrates an iterative retrieval-generation loop for repository-level code completion, while long-context studies show that adding more context is not always sufficient because models can fail to use information buried in the middle of a prompt~\cite{zhang2023repocoder,liu2024lost}. Graph-structured code models and graph-based repository retrieval methods further motivate topology-aware context, but they often require richer graph construction or graph-aware representation learning~\cite{guo2021graphcodebert,liu2024graphcoder}. The Context Sphere occupies a narrower and more lightweight point in this design space: a neural selector identifies the likely issue centroid, and a deterministic AST expansion step restores immediate local dependencies.
+
+\subsection{Multi-Persona LLM Architectures}
+
+Multi-agent software systems such as ChatDev, MetaGPT, and SWE-agent demonstrate that LLMs can be organized into role-specific workflows for design, coding, testing, repository navigation, and tool use~\cite{qian2024chatdev,hong2024metagpt,yang2024sweagent}. These systems motivate role separation, but open-ended dialogue can accumulate prompt noise and confirmation bias. Sycophancy studies show that assistant models can prefer responses that align with user beliefs over truthful correction, motivating stricter reviewer boundaries~\cite{sharma2023sycophancy}. The Context Sphere differs by coupling role separation to a bounded repository neighborhood and by forcing Worker--Reviewer iteration through a structured constraint ledger.
+
+\subsection{Cost-Aware Agent Deployment}
+
+End-to-end coding agents are increasingly evaluated as systems rather than isolated generation calls. This motivates cost-aware reporting alongside correctness, since long-horizon repository repair can require many retrieval, editing, review, and verification turns. HAL and SWE-Effi both reflect this shift by surfacing resource consumption together with task performance~\cite{princetonhal2026,fan2025sweeffi}. Our work follows this direction by reporting local repair success together with token and cost estimates, and by treating context selection as an optimization target rather than an implementation detail.
+
+\subsection{LLM-as-Judge Reliability}
+
+Although the primary ablation reports execution-checked outcomes under a local harness, LLM-as-judge reliability remains relevant because the orchestration loop still uses a Reviewer persona before verification. Prior work on LLM-based judging has documented position, verbosity, and self-enhancement biases~\cite{zheng2023judging}. Accordingly, this paper treats internal approval as an intermediate control signal. Official benchmark execution, gold-patch comparison, and swapped-order judging remain necessary before claiming leaderboard-level repair correctness.

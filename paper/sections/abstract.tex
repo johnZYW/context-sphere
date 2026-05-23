@@ -1,0 +1,7 @@
+Autonomous LLM agents show promise for software engineering tasks but still struggle with context management in large repositories. Static retrieval often causes either context dilution or information amputation by breaking structural dependencies.
+
+We present \textbf{Context Sphere}, a topology-aware framework that combines neural centroid selection with deterministic AST-based neighborhood expansion, then routes the bounded context through an adversarial Product Manager--Worker--Reviewer state machine.
+
+On a 100-case evaluation using a local \texttt{PASS\_TO\_PASS} verification harness over pure-Python SWE-bench Verified instances, Context Sphere achieved 41 successful local repair passes, compared with 36 passes for a dense vector baseline at roughly \$0.08 per issue. A naive Hybrid retriever reached 39 passes, revealing that dense-first merging can displace structurally important dependency files. A preliminary 10-case projection study shows that persona-conditioned routing with a Top-\(K\) safety floor can preserve 9/10 known successes while cutting input tokens by 71.5\% and estimated cost by 58.4\%.
+
+We provide an artifact repository to support reproducibility and position this work as a foundation for future official SWE-bench \texttt{FAIL\_TO\_PASS} evaluation.

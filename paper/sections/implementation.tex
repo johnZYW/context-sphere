@@ -1,0 +1,50 @@
+\section{System Implementation Details}
+\label{sec:implementation}
+
+The production architecture of the Context Sphere framework is partitioned into three decoupled programmatic modules: the neural Locator (\path{inference.py}), the topology-aware Assembler (\path{assembler.py}), and the stateful Orchestrator (\path{orchestrate_resolution.py}). This section describes the runtime configuration and engineering boundaries for each module.
+
+\subsection{The Locator: Neural Selection Field}
+
+The pipeline starts from raw, unstructured issue text. The issue description is passed to the trained selector, which scores visible issue chunks and candidate repository files for language-to-code relevance. The codebase under review is partitioned into bounded code blocks or function-level text segments:
+
+\begin{equation}
+    B = \{b_1, b_2, \dots, b_m\} \subseteq V .
+\end{equation}
+
+The selector computes an alignment score representing whether a block or file is likely to contain, constrain, or directly command the root cause of the regression. The top-\(K\) highest-scoring blocks and projected files establish the initial coordinates of the problem space, acting as the Context Sphere centroid \(C\). Current selector evidence is selector-only: it measures ranking against touched-file labels and does not by itself prove patch correctness.
+
+\subsection{The Assembler: AST Neighborhood Expansion}
+
+Once the centroid coordinates are fixed, the Assembler performs a deterministic local Abstract Syntax Tree (AST) crawl to reconstruct nearby program dependencies. This prevents the information amputation that often occurs when vector retrieval returns an isolated snippet without its imported helpers or adjacent contracts.
+
+\begin{itemize}
+    \item \textbf{Import subgraph parsing:} The assembler reads each centroid file and builds a local syntax tree using Python's native \path{ast} parser. It extracts \path{Import} and \path{ImportFrom} declarations.
+    \item \textbf{Local module resolution:} Extracted import paths are matched against the repository root. If a matching internal module is verified, its source text is appended to the Neighborhood set \(N\).
+    \item \textbf{Context window clamping:} To bound context size and preserve attention density, file content is clipped by a character threshold \(L_{\max}\), exposed through the \path{--max-file-chars} flag:
+    \begin{equation}
+        S_{\text{bounded}} = \{f \in S \mid \mathrm{Length}(f) \le L_{\max}\}.
+    \end{equation}
+\end{itemize}
+
+The current assembler is intentionally conservative: it resolves one-hop Python imports under local repository paths and ignores unresolved, standard-library, or cross-language imports rather than guessing.
+
+\subsection{The Orchestrator: Multi-Persona State Machine}
+
+Runtime coordination is handled by a stateful sequence orchestrator that manages prompt construction, model calls, reviewer feedback, and artifact persistence. The state transitions proceed through:
+
+\begin{enumerate}
+    \item \textbf{\path{State_INIT}:} Ingests the \path{selector_output.json} coordinates file, checks out the target repository to its base Git commit, and initializes the run directory.
+    \item \textbf{\path{State_PM}:} Projects the context sphere through a planning lens and writes a structured persistent constraint ledger, \path{constraints.json}.
+    \item \textbf{\path{State_WORKER}:} Bundles core evidence, neighborhood modules, and the live constraint ledger into an implementation prompt. The Worker persona generates a unified patch candidate \(\Delta\).
+    \item \textbf{\path{State_REVIEWER}:} Evaluates \(\Delta\) against the context graph. The Reviewer returns either \path{APPROVED} or \path{REJECTED}. Rejection appends diagnostic critique back into the live ledger and triggers the next Worker attempt.
+\end{enumerate}
+
+The result is not an unstructured chat among agents. It is a bounded state machine with persistent artifacts: selector output, persona-specific spheres, PM constraints, per-attempt patches, reviewer reports, final patch candidates, and manual-intervention records.
+
+\subsection{Fault-Tolerant Dynamic Provider Fallback}
+
+Production-scale repository repair runs are exposed to API volatility. Multi-turn Context Sphere trajectories can encounter rate limits, quota exhaustion, transient server failures, or gateway timeouts before the state machine reaches a terminal state. A provider failure at this layer should not erase the already-constructed context sphere, constraint ledger, or reviewer feedback history.
+
+The orchestrator therefore supports a fallback routing profile that separates persona state from backend provider state. Under this profile, persona calls are attempted first through the primary DeepSeek \texttt{deepseek-chat} route. If the primary route raises a fallbackable provider error, including HTTP 429, quota-like failures, timeout errors, or HTTP 5xx gateway/server failures, the runtime records a provider-swap event and retries the same uncompressed prompt payload through a secondary MiniMax-compatible chat-completions backend. The retry preserves the current PM, Worker, or Reviewer state and does not rebuild the surrounding run directory.
+
+Provider swaps are written into the run summary as structured metadata, including the role, attempt index, source provider/model, destination provider/model, sanitized error detail, and timestamp. Token and cost accounting are attributed to the backend that actually produced the response, so a mid-run swap changes subsequent usage totals without corrupting the global \path{model_usage} ledger. This design makes provider continuity an execution concern rather than a cognitive concern: the agent personas continue from the same state machine boundary while the backend abstraction absorbs transient provider failure.

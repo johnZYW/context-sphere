@@ -1,0 +1,18 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Internal Approval Versus Correctness}
+
+The most important interpretive boundary is that our early live traces measured internal reviewer approval, while the 100-case ablation measures local execution-verified \texttt{PASS\_TO\_PASS} outcomes. The latter is a stronger signal, but it is still not identical to official SWE-bench \texttt{FAIL\_TO\_PASS} scoring. We therefore treat the ablation as evidence about retrieval architecture under a fixed local verification harness, not as a final leaderboard claim.
+
+\subsection{The Hybrid Paradox}
+
+The ablation produced a counterintuitive result: Hybrid retrieval achieved 39 successful local repair passes, slightly underperforming the Context Sphere configuration at 41 passes. The pass-overlap matrix shows a 51/100 theoretical ceiling, meaning at least one retrieval method solved 51 distinct issues. This suggests that the underlying orchestration agent can solve more cases than any single retrieval policy currently exposes.
+
+The likely cause is the \textit{Dense-First Merge Policy}. In the Hybrid configuration, high-scoring lexical or semantic matches from the dense Vector retriever were placed before structurally selected dependency files. On some cases, these dense matches acted as context noise and displaced the local dependency files that Context Sphere alone would have supplied. The result is not a rejection of hybrid retrieval; it is evidence that naive concatenation is a weak routing policy. Future retrieval systems should use score-normalized interleaving or learned routing to balance lexical relevance against structural dependency evidence.
+
+The same analysis exposes a shared engineering bottleneck. Patch application remained the primary cross-method failure mode, with dozens of failures across all retrieval configurations. Retrieval improvements must therefore be paired with stronger patch materialization and checkout-aware edit application.
+
+\subsection{Research Interpretation}
+
+The strongest current claim is not that Context Sphere solves autonomous bug resolution. The defensible claim is that topology-aware neighborhood expansion improves verified outcomes over a dense Vector baseline on this 100-case pure-Python slice, while the remaining 51-case overlap ceiling and patch-application failures identify where retrieval routing, neighborhood expansion, and edit materialization still break.

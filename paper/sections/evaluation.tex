@@ -1,0 +1,70 @@
+\section{Empirical Evaluation}
+\label{sec:evaluation}
+
+We evaluated Context Sphere with a 100-case retrieval ablation over pure-Python instances sampled from SWE-bench Verified. The ablation compares three retrieval configurations while holding the downstream orchestration and verification harness fixed: a dense Vector baseline, Context Sphere retrieval, and a Hybrid configuration that concatenates dense-vector and Context Sphere candidates.
+
+\subsection{Benchmark Composition}
+
+The benchmark contains 100 pure-Python issue instances sampled from stable SWE-bench Verified repositories. The distribution is dominated by \texttt{django/django} and \texttt{sphinx-doc/sphinx}, with additional cases from \texttt{psf/requests}, \texttt{pytest-dev/pytest}, and \texttt{pallets/flask}. This slice was selected to stress repository-local dependency mapping while avoiding polyglot parser confounds.
+
+One generated test command produced a runner crash before the aggregate summary writer completed, so the local artifact set contains 99 written metric records for each retrieval method. We conservatively count the crashed instance as a non-pass for all methods and report results over the intended 100-case benchmark. The verification signal is the local \texttt{PASS\_TO\_PASS} smoke/regression harness, not official SWE-bench \texttt{FAIL\_TO\_PASS} scoring.
+
+\subsection{Resource-Constrained Optimization Framework}
+
+Recent agent evaluation frameworks increasingly report task outcomes together with resource consumption. The Holistic Agent Leaderboard (HAL) explicitly incorporates cost-controlled evaluation and token trace tracking~\cite{princetonhal2026}, while SWE-Effi argues that software-agent systems should be ranked by both issue-resolution outcomes and resources such as tokens and time~\cite{fan2025sweeffi}. We therefore record inference cost as a first-class metric rather than treating completion rate in isolation.
+
+\subsubsection{System Inference Cost}
+Let \(\mathcal{T}=\{1,2,\dots,T\}\) denote the sequential execution path for one issue-resolution run. At each turn \(t \in \mathcal{T}\), the active persona invokes model \(\mathcal{M}_t\). We define estimated system inference cost as:
+\begin{equation}
+    C_{\mathrm{sys}} = \sum_{t=1}^{T}
+    \left(
+        \phi_{\mathrm{in}}(\mathcal{M}_t) X_{\mathrm{in}}(t)
+        + \phi_{\mathrm{out}}(\mathcal{M}_t) X_{\mathrm{out}}(t)
+    \right),
+\end{equation}
+where \(X_{\mathrm{in}}(t)\) and \(X_{\mathrm{out}}(t)\) are input and output token counts for turn \(t\), and \(\phi_{\mathrm{in}}\) and \(\phi_{\mathrm{out}}\) are per-token cost coefficients for the selected deployment profile.
+
+\subsubsection{Efficacy per Dollar}
+For verification-enabled runs, we define a binary success indicator \(R_{\mathrm{verify}}\in\{0,1\}\), where \(R_{\mathrm{verify}}=1\) only when the final candidate patch applies cleanly and passes the configured repository regression command. The efficacy-per-dollar coefficient is:
+\begin{equation}
+    \eta_{\mathrm{cost}} = \frac{R_{\mathrm{verify}}}{C_{\mathrm{sys}}}.
+\end{equation}
+The cohort-level value \(\bar{\eta}_{\mathrm{cost}}\) exposes the Pareto trade-off between repair success and infrastructure expense.
+
+We use this formulation primarily for per-run accounting and artifact-level comparison; the present paper reports aggregate cost and pass counts rather than ranking systems solely by \(\bar{\eta}_{\mathrm{cost}}\).
+
+\subsection{100-Case Retrieval Ablation}
+
+Table~\ref{tab:verified-ablation-100} summarizes the completed ablation. Context Sphere achieved 41 successful local repair passes, compared with 36 passes for the dense Vector baseline and 39 passes for the Hybrid configuration. This corresponds to an approximately 13.8\% relative improvement over the dense Vector baseline:
+\begin{equation}
+    \frac{41 - 36}{36} \times 100 \approx 13.8\%.
+\end{equation}
+
+\begin{table}[t]
+\centering
+\caption{100-case SWE-bench Verified retrieval ablation under the local \texttt{PASS\_TO\_PASS} verification harness.}
+\label{tab:verified-ablation-100}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+\textbf{Retrieval Configuration} & \textbf{Local \texttt{PASS\_TO\_PASS} Passes} & \textbf{Pass Rate} & \textbf{Relative to Vector} \\
+\midrule
+Dense Vector baseline & 36 / 100 & 36.0\% & -- \\
+Context Sphere & \textbf{41 / 100} & \textbf{41.0\%} & \textbf{+13.8\%} \\
+Hybrid & 39 / 100 & 39.0\% & +8.3\% \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Within this benchmark slice, Context Sphere produced the highest local pass count among the three retrieval architectures. The result is consistent with the central hypothesis that deterministic structural dependency mapping supplies repair-relevant context that dense lexical or semantic retrieval can miss.
+
+\subsection{Cost and Failure Profile}
+
+The Context Sphere run recorded an estimated aggregate inference spend of \(\$8.202211\) across the 100-case campaign. In this local configuration, the framework operated at approximately \$0.08 per issue, suggesting that topology-aware context selection may be useful for cost-sensitive repository-repair pipelines.
+
+The dominant shared bottleneck across all three retrieval methods was not model invocation volume but patch materialization. Patch-application failures accounted for 31 Vector failures, 27 Context Sphere failures, and 24 Hybrid failures. This indicates that future gains require improving both retrieval routing and the patch application layer: better context alone cannot recover patches that cannot be applied to the target checkout.
+
+\subsection{Prior Pilot Traces}
+
+Before the 100-case ablation, the system was evaluated on a smaller 15-case live orchestrator slice. That pilot measured internal reviewer approval rather than execution-verified patch success and reached 7/15 internal approvals. We treat those traces as mechanism evidence for the adversarial feedback loop, not as the primary empirical result of the paper.

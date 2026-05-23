@@ -1,0 +1,88 @@
+\section{Motivation and Core Problem Space}
+\label{sec:motivation}
+
+\begin{figure*}[!t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=1.5cm and 2.0cm,
+    every node/.style={font=\small, align=center},
+    state/.style={draw, rectangle, minimum width=2.6cm, minimum height=1.0cm, rounded corners=4pt, thick, fill=gray!5},
+    lens/.style={draw, diamond, minimum width=2.4cm, minimum height=1.0cm, aspect=2, thick, fill=blue!5},
+    arrow/.style={-{Stealth[scale=1.2]}, thick}
+]
+    \node (init) [state] {\textbf{State\_INIT}\\\scriptsize Repo Target Checkout};
+    \node (pm) [lens, right=of init] {\textbf{PM Lens}\\\scriptsize $\mathcal{M}_{\text{PM}}$};
+    \node (worker) [lens, right=of pm] {\textbf{Worker Lens}\\\scriptsize $\mathcal{M}_{\text{W}}$};
+    \node (reviewer) [lens, below=of worker, yshift=-0.5cm] {\textbf{Reviewer Lens}\\\scriptsize $\mathcal{M}_{\text{R}}$};
+    \node (verify) [state, left=of reviewer, xshift=-0.2cm] {\textbf{State\_VERIFY}\\\scriptsize Execution Harness};
+    \node (done) [state, left=of verify] {\textbf{State\_DONE}\\\scriptsize Unified Patch Commit};
+
+    \draw [arrow] (init) -- node[above, font=\scriptsize] {\texttt{selector\_output}} (pm);
+    \draw [arrow] (pm) -- node[above, font=\scriptsize] {$\mathcal{K}_{\text{shared}}$\\\scriptsize Ledger} (worker);
+    \draw [arrow] (worker) -- node[right, font=\scriptsize] {Patch $\Delta$} (reviewer);
+
+    \draw [arrow] (reviewer.east) -- ++(0.6,0) |- node[pos=0.25, right, font=\scriptsize, color=red!80!black] {\textbf{REJECTED}\\Update Ledger} (worker.east);
+    \draw [arrow] (reviewer) -- node[above, font=\scriptsize] {APPROVED} (verify);
+    \draw [arrow] (verify) -- node[above, font=\scriptsize, color=green!50!black] {\textbf{PASS}\\Tests} (done);
+    \draw [arrow] (verify.north) -- node[left, font=\scriptsize, color=red!80!black, xshift=-0.1cm] {\textbf{FAIL}\\Recursive Context Expansion} (pm.south);
+\end{tikzpicture}%
+}
+\caption{The Context Sphere orchestration state machine. Static structural rejections continuously refine the local constraint ledger, while functional test-suite failures trigger mid-trajectory neighborhood expansion.}
+\Description{State-machine diagram showing State INIT flowing through PM, Worker, Reviewer, Verify, and Done states, with rejection looping back to Worker and verification failure looping back for recursive context expansion.}
+\label{fig:state_machine}
+\end{figure*}
+
+To illustrate the breakdown of traditional codebase manipulation pipelines, consider the architectural regression instance \texttt{wagtail\_\_wagtail-1120} from the SWE-bench validation suite. The issue requires refactoring notification logic inside an administrative subsystem, removing an implicit asynchronous Celery execution pathway and converting the relevant email notification behavior toward direct Django execution.
+
+\subsection{The Failure of Static Retrieval}
+
+A snippet-based dense retrieval pipeline queries the repository using vectors derived from the natural-language issue description. In the successful part of the run, the selector can identify the administrative file handling notification dispatches as a likely locus of the bug. However, static source splitters often chunk files according to line ranges or character limits rather than dependency semantics. The retrieved payload may therefore contain the core body functions while omitting conditional imports, environment checks, decorators, or module-level compatibility code positioned elsewhere in the file.
+
+This partial view leaves the Worker in an informational vacuum. A single-turn LLM may generate a locally plausible synchronous replacement that appears valid within the retrieved block, yet fails to account for adjacent execution contracts defined outside the snippet. The failure is not purely semantic retrieval error; it is a structural representation error. The retrieval unit is too flat to preserve the program neighborhood around the change.
+
+\subsection{The Multi-Agent Sycophancy Trap}
+
+An opposite strategy passes broad source context into an extended prompt and asks collaborating agents to debate the fix. This improves coverage, but it can produce a different failure mode. If a reviewer persona consumes the same diluted prompt as the worker, lacks an explicit contract ledger, and is asked for open-ended feedback, it may default to surface-level confirmation. The resulting review appears collaborative while missing silent logic errors, missing imports, or configuration mismatches.
+
+The Context Sphere addresses these vulnerabilities in two ways. First, it expands the centroid file through AST-derived local dependencies before prompting, grounding generation in a bounded architectural neighborhood. Second, it formalizes multi-persona interaction as a state machine over a persistent JSON constraint ledger. The Reviewer is not merely invited to comment; it must emit an explicit \texttt{APPROVED} or \texttt{REJECTED} state. Rejections are serialized into the next Worker turn, turning critique into state rather than leaving it as conversational residue.
+
+\subsection{Observed Convergence Signal}
+
+In the live \texttt{wagtail\_\_wagtail-1120} trace, the Worker required three attempts before internal approval. The first two attempts were rejected by the Reviewer for structural contract failures, and the rejection diagnostics were folded into the active constraints before the next generation turn. This trace does not by itself prove that the final patch is benchmark-correct. It does, however, demonstrate the intended operational behavior: reviewer critique can alter the subsequent patch search path instead of collapsing into immediate approval.
+
+\begin{figure}[!b]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}
+    \draw[dashed, color=gray!20] (-3.5,-3.5) grid (3.5,3.5);
+
+    \begin{scope}
+        \draw[fill=blue!4, draw=blue!30, thick, opacity=0.7] (0,0) circle (2.0cm);
+        \draw[fill=blue!15, draw=blue!60, thick] (0,0) circle (0.9cm);
+    \end{scope}
+
+    \node[color=blue!90!black, font=\scriptsize] at (0,0) {\textbf{Centroid} ($C$)};
+    \node[color=blue!60!black, font=\scriptsize] at (0,1.3) {\textbf{AST Neighborhood} ($N$)};
+
+    \foreach \p in {(-2.8,1.5), (-2.2,-2.2), (3.0,2.5), (0.8,-2.8), (-1.2,2.6)}
+        \filldraw[color=gray!40] \p circle (2pt);
+
+    \filldraw[color=red] (2.4,-1.2) circle (3pt)
+        node[right, font=\scriptsize, color=red!90!black, xshift=0.05cm, align=left]
+        {\textbf{Sub-Centroid} ($C_{\text{sub}}$)\\\scriptsize Trace-isolated target};
+
+    \draw[red, dashed, thick, fill=red!4, fill opacity=0.3]
+        plot[smooth cycle, tension=0.65]
+        coordinates {(0,1.5) (1.2,1.0) (3.1,-1.2) (1.4,-2.0) (-1.2,-1.2) (-1.4,0.4)};
+
+    \node[color=red!80!black, font=\scriptsize, align=center] at (1.8,-2.4)
+        {\textbf{Asymmetric Sphere}\\\textbf{Expansion Volume}};
+
+    \node[color=gray!60, font=\tiny] at (-2.4,-3.2) {Repository Space $G(V,E)$};
+\end{tikzpicture}%
+}
+\caption{Geometric conceptualization of dynamic context expansion. Following a verification error, the sphere mutates from a symmetric one-hop volume to an asymmetric topological field absorbing the explicit failure-trace coordinates.}
+\Description{Diagram of a code repository as a graph-like space with an initial centroid, a surrounding AST neighborhood, and an asymmetric red expansion toward a trace-isolated sub-centroid.}
+\label{fig:spatial_sphere}
+\end{figure}

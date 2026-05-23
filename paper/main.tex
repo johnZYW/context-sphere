@@ -1,0 +1,72 @@
+\documentclass[sigconf,nonacm]{acmart}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+% --- TikZ Graphics Configuration for Architecture Diagrams ---
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc}
+\setlength{\emergencystretch}{3em}
+
+\setcopyright{none}
+\copyrightyear{2026}
+\acmYear{2026}
+
+\title{Context Sphere: Topology-Aware Context Orchestration for Cost-Efficient LLM Repository Repair}
+
+\author{Yuwen Zhang\footnote{PhD candidate, School of Aerospace, Mechanical and Mechatronic Engineering}}
+\affiliation{%
+  \institution{The University of Sydney}
+  \city{Sydney}
+  \state{NSW}
+  \postcode{2006}
+  \country{Australia}}
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10011007.10011006.10011050</concept_id>
+  <concept_desc>Software and its engineering~Software testing and debugging</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010147.10010257.10010293</concept_id>
+  <concept_desc>Computing methodologies~Natural language generation</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[300]{Software and its engineering~Software testing and debugging}
+\ccsdesc[300]{Computing methodologies~Natural language generation}
+
+\keywords{large language models, software engineering agents, context retrieval, code review, multi-agent systems}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/introduction}
+\input{sections/motivation}
+\input{sections/related_work}
+\input{sections/approach}
+\input{sections/implementation}
+\input{sections/research_questions}
+\input{sections/methodology}
+\input{sections/evaluation}
+\input{sections/discussion}
+\input{sections/projection}
+\input{sections/limitations}
+\input{sections/reproducibility}
+\input{sections/conclusion}
+\input{sections/artifact_availability}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{main}
+
+\end{document}

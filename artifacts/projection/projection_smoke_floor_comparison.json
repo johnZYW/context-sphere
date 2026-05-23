@@ -1,0 +1,504 @@
+{
+  "cases": [
+    {
+      "baseline_context_chars": 341197,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.02275454,
+        "input_tokens": 81302,
+        "output_tokens": 730,
+        "total_tokens": 82032
+      },
+      "cost_usd": 0.0088857,
+      "floor_context_char_reduction_pct": 74.44789960052404,
+      "floor_context_chars": 87183,
+      "floor_input_token_reduction_pct": 75.00307495510566,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 72.39248098303102,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0088857,
+        "input_tokens": 20323,
+        "output_tokens": 2324,
+        "total_tokens": 22647
+      },
+      "instance_id": "django__django-10914",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 63844,
+      "nofloor_status": "APPROVED",
+      "nofloor_tests_passed": true,
+      "nofloor_usage": {
+        "calls": 5,
+        "cost": 0.0152835,
+        "input_tokens": 30585,
+        "output_tokens": 5090,
+        "total_tokens": 35675
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 11
+      },
+      "slug": "verified_django_10914"
+    },
+    {
+      "baseline_context_chars": 843559,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.05762887,
+        "input_tokens": 207541,
+        "output_tokens": 1448,
+        "total_tokens": 208989
+      },
+      "cost_usd": 0.0538506,
+      "floor_context_char_reduction_pct": 63.077627053946436,
+      "floor_context_chars": 311462,
+      "floor_input_token_reduction_pct": 30.871490452488903,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 27.04017914818483,
+      "floor_usage": {
+        "calls": 5,
+        "cost": 0.0538506,
+        "input_tokens": 143470,
+        "output_tokens": 9008,
+        "total_tokens": 152478
+      },
+      "instance_id": "django__django-11138",
+      "iterations": 2,
+      "llm_calls": 5,
+      "min_k": 2,
+      "nofloor_context_chars": 259513,
+      "nofloor_status": "MANUAL_INTERVENTION",
+      "nofloor_tests_passed": null,
+      "nofloor_usage": {
+        "calls": 4,
+        "cost": 0.0574509,
+        "input_tokens": 174979,
+        "output_tokens": 4131,
+        "total_tokens": 179110
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 5,
+        "reviewer": 2,
+        "worker": 20
+      },
+      "slug": "verified_django_11138"
+    },
+    {
+      "baseline_context_chars": 997084,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.06157564,
+        "input_tokens": 224872,
+        "output_tokens": 782,
+        "total_tokens": 225654
+      },
+      "cost_usd": 0.0103665,
+      "floor_context_char_reduction_pct": 90.50792109792154,
+      "floor_context_chars": 94644,
+      "floor_input_token_reduction_pct": 90.52838948379522,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 89.09259308498852,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0103665,
+        "input_tokens": 21299,
+        "output_tokens": 3314,
+        "total_tokens": 24613
+      },
+      "instance_id": "django__django-11179",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 74851,
+      "nofloor_status": "APPROVED",
+      "nofloor_tests_passed": true,
+      "nofloor_usage": {
+        "calls": 3,
+        "cost": 0.0073329,
+        "input_tokens": 16875,
+        "output_tokens": 1892,
+        "total_tokens": 18767
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 2
+      },
+      "slug": "verified_django_11179"
+    },
+    {
+      "baseline_context_chars": 84619,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.00709826,
+        "input_tokens": 21568,
+        "output_tokens": 1159,
+        "total_tokens": 22727
+      },
+      "cost_usd": 0.0095673,
+      "floor_context_char_reduction_pct": 62.70341176331557,
+      "floor_context_chars": 31560,
+      "floor_input_token_reduction_pct": 60.61294510385758,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 36.88564262771153,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0095673,
+        "input_tokens": 8495,
+        "output_tokens": 5849,
+        "total_tokens": 14344
+      },
+      "instance_id": "django__django-11206",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 14286,
+      "nofloor_status": "MANUAL_INTERVENTION",
+      "nofloor_tests_passed": null,
+      "nofloor_usage": {
+        "calls": 4,
+        "cost": 0.0054477,
+        "input_tokens": 10699,
+        "output_tokens": 1865,
+        "total_tokens": 12564
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 2
+      },
+      "slug": "verified_django_11206"
+    },
+    {
+      "baseline_context_chars": 1547515,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.09298732,
+        "input_tokens": 339366,
+        "output_tokens": 1235,
+        "total_tokens": 340601
+      },
+      "cost_usd": 0.0385467,
+      "floor_context_char_reduction_pct": 64.87400768328578,
+      "floor_context_chars": 543580,
+      "floor_input_token_reduction_pct": 66.55263049333169,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 65.57438175460436,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0385467,
+        "input_tokens": 113509,
+        "output_tokens": 3745,
+        "total_tokens": 117254
+      },
+      "instance_id": "django__django-11211",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 418696,
+      "nofloor_status": "APPROVED",
+      "nofloor_tests_passed": true,
+      "nofloor_usage": {
+        "calls": 3,
+        "cost": 0.0355092,
+        "input_tokens": 87468,
+        "output_tokens": 7724,
+        "total_tokens": 95192
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 11
+      },
+      "slug": "verified_django_11211"
+    },
+    {
+      "baseline_context_chars": 431446,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.02773181,
+        "input_tokens": 97023,
+        "output_tokens": 1396,
+        "total_tokens": 98419
+      },
+      "cost_usd": 0.0184158,
+      "floor_context_char_reduction_pct": 88.99653722597961,
+      "floor_context_chars": 47474,
+      "floor_input_token_reduction_pct": 64.3074322583305,
+      "floor_status": "MANUAL_INTERVENTION",
+      "floor_tests_passed": false,
+      "floor_token_reduction_pct": 58.017252766234165,
+      "floor_usage": {
+        "calls": 7,
+        "cost": 0.0184158,
+        "input_tokens": 34630,
+        "output_tokens": 6689,
+        "total_tokens": 41319
+      },
+      "instance_id": "django__django-11239",
+      "iterations": 3,
+      "llm_calls": 7,
+      "min_k": 2,
+      "nofloor_context_chars": 26433,
+      "nofloor_status": "APPROVED",
+      "nofloor_tests_passed": true,
+      "nofloor_usage": {
+        "calls": 4,
+        "cost": 0.0075225,
+        "input_tokens": 12863,
+        "output_tokens": 3053,
+        "total_tokens": 15916
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 3
+      },
+      "slug": "verified_django_11239"
+    },
+    {
+      "baseline_context_chars": 291343,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.0217038,
+        "input_tokens": 75850,
+        "output_tokens": 1113,
+        "total_tokens": 76963
+      },
+      "cost_usd": 0.0119763,
+      "floor_context_char_reduction_pct": 64.3777265971724,
+      "floor_context_chars": 103783,
+      "floor_input_token_reduction_pct": 63.84838497033619,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 60.31079869547704,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0119763,
+        "input_tokens": 27421,
+        "output_tokens": 3125,
+        "total_tokens": 30546
+      },
+      "instance_id": "django__django-11276",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 72090,
+      "nofloor_status": "APPROVED",
+      "nofloor_tests_passed": true,
+      "nofloor_usage": {
+        "calls": 3,
+        "cost": 0.0086982,
+        "input_tokens": 18982,
+        "output_tokens": 2503,
+        "total_tokens": 21485
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 9
+      },
+      "slug": "verified_django_11276"
+    },
+    {
+      "baseline_context_chars": 1438399,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.08851094,
+        "input_tokens": 322302,
+        "output_tokens": 1354,
+        "total_tokens": 323656
+      },
+      "cost_usd": 0.0266586,
+      "floor_context_char_reduction_pct": 75.7916266626993,
+      "floor_context_chars": 348213,
+      "floor_input_token_reduction_pct": 76.65357335666549,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 75.69950811973206,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0266586,
+        "input_tokens": 75246,
+        "output_tokens": 3404,
+        "total_tokens": 78650
+      },
+      "instance_id": "django__django-11299",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 238729,
+      "nofloor_status": "MANUAL_INTERVENTION",
+      "nofloor_tests_passed": false,
+      "nofloor_usage": {
+        "calls": 5,
+        "cost": 0.0523185,
+        "input_tokens": 153427,
+        "output_tokens": 5242,
+        "total_tokens": 158669
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 5
+      },
+      "slug": "verified_django_11299"
+    },
+    {
+      "baseline_context_chars": 1830169,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 5,
+        "cost": 0.15005837,
+        "input_tokens": 550891,
+        "output_tokens": 1198,
+        "total_tokens": 552089
+      },
+      "cost_usd": 0.0491988,
+      "floor_context_char_reduction_pct": 84.78992923604322,
+      "floor_context_chars": 278370,
+      "floor_input_token_reduction_pct": 78.3303775156973,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 76.3568917330358,
+      "floor_usage": {
+        "calls": 5,
+        "cost": 0.0491988,
+        "input_tokens": 119376,
+        "output_tokens": 11155,
+        "total_tokens": 130531
+      },
+      "instance_id": "django__django-11433",
+      "iterations": 2,
+      "llm_calls": 5,
+      "min_k": 2,
+      "nofloor_context_chars": 206710,
+      "nofloor_status": "MANUAL_INTERVENTION",
+      "nofloor_tests_passed": false,
+      "nofloor_usage": {
+        "calls": 6,
+        "cost": 0.0467076,
+        "input_tokens": 133668,
+        "output_tokens": 5506,
+        "total_tokens": 139174
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 7
+      },
+      "slug": "verified_django_11433"
+    },
+    {
+      "baseline_context_chars": 678577,
+      "baseline_status": "APPROVED",
+      "baseline_tests_passed": true,
+      "baseline_usage": {
+        "calls": 3,
+        "cost": 0.04363106,
+        "input_tokens": 158268,
+        "output_tokens": 817,
+        "total_tokens": 159085
+      },
+      "cost_usd": 0.0111066,
+      "floor_context_char_reduction_pct": 80.33001413251554,
+      "floor_context_chars": 133476,
+      "floor_input_token_reduction_pct": 81.57176434907878,
+      "floor_status": "APPROVED",
+      "floor_tests_passed": true,
+      "floor_token_reduction_pct": 80.43184461137128,
+      "floor_usage": {
+        "calls": 3,
+        "cost": 0.0111066,
+        "input_tokens": 29166,
+        "output_tokens": 1964,
+        "total_tokens": 31130
+      },
+      "instance_id": "django__django-11880",
+      "iterations": 1,
+      "llm_calls": 3,
+      "min_k": 2,
+      "nofloor_context_chars": 74881,
+      "nofloor_status": "APPROVED",
+      "nofloor_tests_passed": true,
+      "nofloor_usage": {
+        "calls": 3,
+        "cost": 0.0072648,
+        "input_tokens": 16736,
+        "output_tokens": 1870,
+        "total_tokens": 18606
+      },
+      "repo": "django/django",
+      "selected_node_counts": {
+        "pm": 2,
+        "reviewer": 2,
+        "worker": 3
+      },
+      "slug": "verified_django_11880"
+    }
+  ],
+  "summary": {
+    "baseline_context_chars": 8483908,
+    "baseline_cost_usd": 0.57368061,
+    "baseline_input_tokens": 2078983,
+    "baseline_passes": 10,
+    "baseline_total_tokens": 2090215,
+    "case_count": 10,
+    "failed_cases_floor": [
+      "verified_django_11239"
+    ],
+    "projection_floor_context_char_reduction_pct": 76.66,
+    "projection_floor_context_chars": 1979745,
+    "projection_floor_cost_reduction_pct": 58.41,
+    "projection_floor_cost_usd": 0.2385729,
+    "projection_floor_input_token_reduction_pct": 71.48,
+    "projection_floor_input_tokens": 592935,
+    "projection_floor_mean_selected_nodes": {
+      "pm": 2.3,
+      "reviewer": 2,
+      "worker": 7.3
+    },
+    "projection_floor_passes": 9,
+    "projection_floor_token_reduction_pct": 69.21,
+    "projection_floor_total_tokens": 643512,
+    "projection_no_floor_context_chars": 1450033,
+    "projection_no_floor_cost_usd": 0.2435358,
+    "projection_no_floor_passes": 6,
+    "projection_no_floor_to_floor_pass_delta": 3,
+    "projection_no_floor_total_tokens": 695158
+  }
+}

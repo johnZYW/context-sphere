@@ -1,0 +1,15 @@
+\section{Reproducibility and Artifacts}
+\label{sec:reproducibility}
+
+All experiments were conducted using the local verification harness described in Sec.~\ref{sec:evaluation}. Results are reconstructed from per-case metrics stored under:
+\begin{itemize}
+    \item \path{outputs/ablation_100_vector}
+    \item \path{outputs/ablation_100_context}
+    \item \path{outputs/ablation_100_hybrid}
+    \item \path{outputs/projection_smoke_10_fallback}
+    \item \path{outputs/projection_smoke_10_floor}
+\end{itemize}
+
+The full framework (Locator, AST Assembler, multi-persona Orchestrator, and Projection Model) is implemented in Python. The exact 100-case instance list is included in the artifact repository to support reproduction and paired comparison across retrieval configurations.
+
+The artifact repository also includes the retrieval configuration files and per-case result ledgers used to reconstruct Tables~\ref{tab:verified-ablation-100} and~\ref{tab:projection_results}. Full reproduction instructions and the complete artifact package are available at \url{https://github.com/johnZYW/context-sphere}.
